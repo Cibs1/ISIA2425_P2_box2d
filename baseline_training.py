@@ -22,7 +22,7 @@ class Logger:
         pass  # Needed for compatibility with sys.stdout
 
 # Set up logging
-log_path = "training_output.csv"
+log_path = "training_output_a2c.csv"
 sys.stdout = Logger(log_path)
 
 # Create the environment
@@ -34,7 +34,7 @@ model = A2C('MlpPolicy', env, verbose=1, device="cuda")
 # Training settings
 total_timesteps = 1_000_000  # Total timesteps to train the model
 save_interval = 10_000       # Save the model every 10,000 timestepsz
-model_save_path = "a2c_bipedalwalkerbaseline"  # File path for saving the model
+model_save_path = "a2c_bipedalwalker"  # File path for saving the model
 
 # Start training
 start_time = time.time()
@@ -54,14 +54,14 @@ print(f"Training completed in {time.time() - start_time:.2f} seconds.")
 print(f"Final model saved as {model_save_path}.zip")
 
 # Test the trained model
-obs = env.reset()
+obs, _ = env.reset()  # Fix: Unpack the tuple returned by `env.reset()`
 for step in range(200):
     env.render()
     action, _states = model.predict(obs)
     obs, reward, terminated, truncated, info = env.step(action)
 
     if terminated or truncated:
-        obs = env.reset()
+        obs, _ = env.reset()  # Fix: Unpack the tuple here as well
 
 env.close()
 

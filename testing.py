@@ -1,9 +1,14 @@
 from stable_baselines3 import A2C
+from stable_baselines3 import DDPG
+from stable_baselines3 import PPO
+from stable_baselines3 import SAC
+from sb3_contrib import TRPO
+from sb3_contrib import TQC
 import gymnasium as gym
 
 def test_agent(model_path, steps=1000):
     # Load the trained model
-    model = A2C.load(model_path)
+    model = TQC.load(model_path)
 
     # Create the environment
     env = gym.make('BipedalWalker-v3',render_mode="human")
@@ -31,5 +36,5 @@ def test_agent(model_path, steps=1000):
 
 if __name__ == "__main__":
     # Path to your trained model
-    model_path = "a2c_bipedalwithobstacles.zip"  # Update with your file path
+    model_path = "models/TQC/1000000.zip"  # Update with your file path
     test_agent(model_path)
