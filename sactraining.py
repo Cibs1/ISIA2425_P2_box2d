@@ -3,7 +3,7 @@ from stable_baselines3 import SAC
 import os
 
 # Directories for saving models and logs
-models_dir = "models/SAC"
+models_dir = "models/SAC_tweaked"
 logdir = "logs"
 
 if not os.path.exists(models_dir):
@@ -24,6 +24,6 @@ TIMESTEPS = 100000
 iters = 0
 
 # Training loop
-for i in range(30):
-    model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="SAC")
+for i in range(2):
+    model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="SAC_tweaked")
     model.save(f"{models_dir}/{TIMESTEPS*i}")

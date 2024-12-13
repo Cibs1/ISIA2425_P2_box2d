@@ -3,7 +3,7 @@ from sb3_contrib import TQC
 import os
 
 # Directories for saving models and logs
-models_dir = "models/TQC"
+models_dir = "models/TQC_hardcore"
 logdir = "logs"
 
 if not os.path.exists(models_dir):
@@ -13,7 +13,7 @@ if not os.path.exists(logdir):
     os.makedirs(logdir)
 
 # Create the environment
-env = gym.make('BipedalWalker-v3')
+env = gym.make('BipedalWalker-v3', hardcore=True)
 env.reset()
 
 # Initialize the model with DDPG
@@ -25,5 +25,5 @@ iters = 0
 
 # Training loop
 for i in range(50):
-    model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="TQC")
+    model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="TQC_hardcore")
     model.save(f"{models_dir}/{TIMESTEPS*i}")

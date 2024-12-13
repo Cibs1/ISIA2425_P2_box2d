@@ -6,12 +6,12 @@ from sb3_contrib import TRPO
 from sb3_contrib import TQC
 import gymnasium as gym
 
-def test_agent(model_path, steps=1000):
+def test_agent(model_path, steps=10000):
     # Load the trained model
     model = TQC.load(model_path)
 
     # Create the environment
-    env = gym.make('BipedalWalker-v3',render_mode="human")
+    env = gym.make('BipedalWalker-v3',render_mode="human", hardcore=True)
 
     # Reset the environment
     obs, _ = env.reset()
@@ -36,5 +36,5 @@ def test_agent(model_path, steps=1000):
 
 if __name__ == "__main__":
     # Path to your trained model
-    model_path = "models/TQC/1000000.zip"  # Update with your file path
+    model_path = "models/TQC_hardcore/5000000.zip"  # Update with your file path
     test_agent(model_path)
